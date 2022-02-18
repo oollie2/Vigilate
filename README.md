@@ -8,4 +8,7 @@ Download the source, run install.bat as administrator which will handle building
 
 ## Uninstall 
 To remove, you can manually remove the folder it is installed to (by default C:\Program Files\Vigilate but you can modify the batch file)
-Then run sc.exe delete Vigilate
+Then run in a terminal:
+```
+sc.exe delete Vigilate
+```
