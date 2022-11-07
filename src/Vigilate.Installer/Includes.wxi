@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+	<?define ProductName="Vigilate"?>
+	<?define CompanyName="oollie34" ?>
+	<?define ProductVersion="!(bind.fileVersion.vigilate)"?>
+</Include>

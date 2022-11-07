@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include $(sys.SOURCEFILEDIR)Includes.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="!(bind.fileVersion.vigilate)" Manufacturer="$(var.CompanyName)" UpgradeCode="CBB77BD5-950B-47E5-B681-F464EE773F4C">
+		<Package InstallerVersion="500"
+			Platform="x64"
+			Compressed="yes"
+			InstallScope="perMachine"
+			InstallPrivileges="elevated" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." AllowSameVersionUpgrades="yes"/>
+		<MediaTemplate EmbedCab="yes" />
+		<Property Id="REINSTALLMODE" Value="amus" />
+
+		<Condition Message="You must be an administrator to install this product">Privileged</Condition>
+		<Feature Id="Vigilate_Version" Title="Vigilate_Version" Level="1" />
+		<Feature Id="ProductFeature" Title="Vigilate Install" Level="1">
+			<ComponentGroupRef Id="Vigilate_Project"/>
+			<ComponentRef Id="ApplicationShortcutStartMenu"/>
+		</Feature>
+
+		<UI Id="UserInterface">
+			<UIRef Id="WixUI_InstallDir" />
+			<Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
+			<Publish Dialog="WelcomeDlg"
+				  Control="Next"
+				  Event="NewDialog"
+				  Value="InstallDirDlg"
+				  Order="2">1</Publish>
+			<Publish Dialog="InstallDirDlg"
+				  Control="Back"
+				  Event="NewDialog"
+				  Value="WelcomeDlg"
+				  Order="2">1</Publish>
+			<Publish Dialog="ExitDialog"
+					 Control="Finish"
+					 Event="DoAction"
+					 Value="LaunchApplication">
+				WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed
+			</Publish>
+		</UI>
+
+		<Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Vigilate" />
+
+		<Property Id="WixShellExecTarget" Value="[INSTALLFOLDER]Vigilate.exe" />
+		<CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+		<UIRef Id="WixUI_ErrorProgressText" />
+
+		<Icon Id="app.ico" SourceFile="$(var.Vigilate.ProjectDir)Images\app.ico" />
+		<Property Id="ARPPRODUCTICON" Value="app.ico" />
+
+		<UIRef Id="WixUI_InstallDir" />
+		<UIRef Id="WixUI_ErrorProgressText" />
+		<Property Id="DISABLEADVTSHORTCUTS" Value="1"/>
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="ManufacturerFolder" Name="$(var.CompanyName)">
+					<Directory Id="INSTALLFOLDER" Name="$(var.ProductName)">
+						<Component Feature="Vigilate_Version">
+							<File Id="vigilate" Source="$(var.Vigilate.TargetDir)Vigilate.exe" Vital="yes" KeyPath="yes" />
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+
+			<Directory Id="ProgramMenuFolder" Name="StartMenu">
+				<Directory Id="StartUp" Name="Startup">
+					<Component Id="ApplicationShortcutStartMenu" Guid="{8861A329-AB3D-4614-84D6-297E2633B28C}">
+						<Shortcut Id="ApplicationStartMenuShortcut"
+							Name="Vigilate"
+							Description="Launch Vigilate"
+							Target="[INSTALLFOLDER]Vigilate.exe"
+							WorkingDirectory="INSTALLFOLDER"/>
+						<RemoveFolder Id="ProgramMenuFolder" On="uninstall"/>
+						<RegistryValue
+							Root="HKCU"
+							Key="Software\$(var.CompanyName)\$(var.ProductName)"
+							Name="StartUpShortcut"
+							Type="integer"
+							Value="1"
+							KeyPath="yes"/>
+					</Component>
+				</Directory>
+			</Directory>
+
+		</Directory>
+	</Product>
+</Wix>

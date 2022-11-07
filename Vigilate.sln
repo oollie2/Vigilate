@@ -1,25 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vigilate", "src\Vigilate.csproj", "{07760680-56D1-48D7-A1E9-7D2F5A8642DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vigilate", "src\Vigilate\Vigilate.csproj", "{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECD91FE1-202C-4B29-8E41-1D943585EBD5}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Vigilate.Installer", "src\Vigilate.Installer\Vigilate.Installer.wixproj", "{5384EC0A-036B-49DB-8053-F84FAFA73198}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07760680-56D1-48D7-A1E9-7D2F5A8642DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07760680-56D1-48D7-A1E9-7D2F5A8642DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07760680-56D1-48D7-A1E9-7D2F5A8642DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07760680-56D1-48D7-A1E9-7D2F5A8642DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}.Debug|x64.ActiveCfg = Debug|x64
+		{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}.Debug|x64.Build.0 = Debug|x64
+		{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}.Release|x64.ActiveCfg = Release|x64
+		{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}.Release|x64.Build.0 = Release|x64
+		{5384EC0A-036B-49DB-8053-F84FAFA73198}.Debug|x64.ActiveCfg = Debug|x64
+		{5384EC0A-036B-49DB-8053-F84FAFA73198}.Debug|x64.Build.0 = Debug|x64
+		{5384EC0A-036B-49DB-8053-F84FAFA73198}.Release|x64.ActiveCfg = Release|x64
+		{5384EC0A-036B-49DB-8053-F84FAFA73198}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BE3979BA-C373-4C0F-9AC5-D9E88DF6BAD5}
+		SolutionGuid = {83B0B430-79DF-47A3-8CC9-6A9C56BA4DA4}
 	EndGlobalSection
 EndGlobal
