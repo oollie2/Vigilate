@@ -40,5 +40,10 @@ namespace VigilateUI
             bindings.StartEnabled = true;
             bindings.StopEnabled = false;
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
     }
 }
