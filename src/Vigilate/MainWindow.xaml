@@ -13,12 +13,12 @@
         Width="332">
     <Grid>
         <tb:TaskbarIcon 
-                    x:Name="taskbarIcon"
-                    Visibility="Visible"
-                    ToolTipText="Vigilate Service"
-                    IconSource="/Images/app.ico"
-                    MenuActivation="LeftOrRightClick"
-                    PopupActivation="DoubleClick">
+            x:Name="taskbarIcon"
+            Visibility="Visible"
+            ToolTipText="Vigilate Service"
+            IconSource="/Images/app.ico"
+            MenuActivation="LeftOrRightClick"
+            PopupActivation="DoubleClick">
         </tb:TaskbarIcon>
         <Label
             Grid.ColumnSpan="2"

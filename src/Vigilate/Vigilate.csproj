@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <TargetFramework>net7.0-windows</TargetFramework>
 	  <OutputType>WinExe</OutputType>
 	  <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
 	  <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
@@ -32,20 +32,24 @@
 	  <PackageIcon>Images\app.ico</PackageIcon>
 	  <PackageIconUrl />
 	  <ApplicationIcon>Images\app.ico</ApplicationIcon>
-	  <AssemblyVersion>1.0.1.0</AssemblyVersion>
-	  <FileVersion>1.0.1.0</FileVersion>
+	  <AssemblyVersion>1.1.0.6</AssemblyVersion>
+	  <FileVersion>1.1.0.6</FileVersion>
 	  <BaseOutputPath>build\output\</BaseOutputPath>
 	  <BaseIntermediateOutputPath>build\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="build\**" />
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="build\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="bin\**" />
+    <None Remove="build\**" />
     <None Remove="obj\**" />
     <Page Remove="bin\**" />
+    <Page Remove="build\**" />
     <Page Remove="obj\**" />
   </ItemGroup>
 

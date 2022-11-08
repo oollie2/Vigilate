@@ -7,6 +7,8 @@ namespace Vigilate.Classes
 {
     internal class Vigilator
     {
+        public TaskBarBindings TaskBarBindings { get; set; }
+        public event EventHandler StateChange;
         internal Vigilator() { }
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
@@ -19,20 +21,20 @@ namespace Vigilate.Classes
             ES_CONTINUOUS = 0x80000000,
         }
         private readonly AutoResetEvent _event = new(false);
-        private bool GetNoSleep = false;
-        public void NoSleep(int msDelay)
+        public void NoSleep()
         {
-            GetNoSleep = true;
+            TaskBarBindings.StartStop = "Stop";
+            Settings.Main.State = true;
+            StateChange?.Invoke(this, EventArgs.Empty);
             new TaskFactory().StartNew(async () =>
             {
-                while (GetNoSleep)
+                while (Settings.Main.State)
                 {
                     SetThreadExecutionState(
                         EXECUTION_STATE.ES_CONTINUOUS
                         | EXECUTION_STATE.ES_DISPLAY_REQUIRED
                         | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
-                    await Task.Delay(msDelay);
-                    System.Diagnostics.Debug.WriteLine("delaying");
+                    await Task.Delay(Settings.Main.PollPeriodMs);
                 }
                 _event.WaitOne();
             },
@@ -40,7 +42,9 @@ namespace Vigilate.Classes
         }
         public void SomeSleep()
         {
-            GetNoSleep = false;
+            TaskBarBindings.StartStop = "Start";
+            Settings.Main.State = false;
+            StateChange?.Invoke(this, EventArgs.Empty);
             _event.Set();
         }
     }
