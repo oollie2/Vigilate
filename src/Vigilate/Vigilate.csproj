@@ -32,8 +32,8 @@
 	  <PackageIcon>Images\app.ico</PackageIcon>
 	  <PackageIconUrl />
 	  <ApplicationIcon>Images\app.ico</ApplicationIcon>
-	  <AssemblyVersion>1.1.0.6</AssemblyVersion>
-	  <FileVersion>1.1.0.6</FileVersion>
+	  <AssemblyVersion>1.1.0.7</AssemblyVersion>
+	  <FileVersion>1.1.0.7</FileVersion>
 	  <BaseOutputPath>build\output\</BaseOutputPath>
 	  <BaseIntermediateOutputPath>build\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
