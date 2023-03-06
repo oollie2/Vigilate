@@ -1,39 +1,42 @@
 ﻿using System.Reflection;
 using System;
 using System.Windows;
-using Vigilate.Classes;
+using Vigilate.Core;
+using NLog;
 
-namespace VigilateUI
+namespace Vigilate
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        public static MainWindow MainWin;
-        private Settings Settings { get; set; }
+        internal static ILogger _logger = LogManager.GetCurrentClassLogger();
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            _logger.Info("starting vigilate.");
 #if DEBUG
             string SettingsFile = Environment.ExpandEnvironmentVariables(@"%APPDATA%\" +
                 ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCompanyAttribute), false)).Company + @"\" +
                 Assembly.GetExecutingAssembly().GetName().Name +
-                @"\Settings\settings_test.xml");
+                @"\Settings\settings_test.json");
 
 #else
             string SettingsFile = Environment.ExpandEnvironmentVariables(@"%APPDATA%\" +
                 ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCompanyAttribute), false)).Company + @"\" +
                 Assembly.GetExecutingAssembly().GetName().Name +
-                @"\Settings\settings.xml");
+                @"\Settings\settings.json");
 #endif
-            Settings = new(SettingsFile);
+            Settings<VigilateSettings> Settings = new(SettingsFile);
 
-            MainWin = new();
+            _ = new MainWindow();
+            _logger.Info("vigilate succesfully started.");
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Settings.Dispose();
+            _logger.Info("vigilate shutting down.");
+            Settings<VigilateSettings>.Save();
             Environment.Exit(0);
         }
     }
