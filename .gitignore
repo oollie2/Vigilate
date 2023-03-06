@@ -192,3 +192,4 @@ bin
 obj
 
 .vs
+/src/Vigilate.Installer/_doNotEdit-PublishOutput.wxs

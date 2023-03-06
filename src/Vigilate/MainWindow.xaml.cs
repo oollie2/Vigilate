@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
 using Vigilate.Core;
 
@@ -14,7 +15,8 @@ namespace Vigilate
         public MainWindow()
         {
             InitializeComponent();
-            Title = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Version v = Assembly.GetExecutingAssembly().GetName().Version;
+            Title = string.Format("{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             vigilator = new();
             vigilator.StateChange += Vigilator_StateChange;
             InitTaskbar();
