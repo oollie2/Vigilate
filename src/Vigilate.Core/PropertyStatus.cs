@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace Vigilate.Classes
+namespace Vigilate.Core
 {
-    sealed class MainWindowBindings: INotifyPropertyChanged
+    public class PropertyStatus: INotifyPropertyChanged
     {
-        public MainWindowBindings()
+        public PropertyStatus()
         {
             main = new()
             {
@@ -12,7 +12,7 @@ namespace Vigilate.Classes
                 StopEnabled = false
             };
         }
-        public static MainWindowData main;
+        public static Properties main;
         public bool StartEnabled
         {
             get { return main.StartEnabled; }
@@ -29,7 +29,7 @@ namespace Vigilate.Classes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    sealed class MainWindowData
+    public class Properties
     {
         public bool StartEnabled { get; set; }
         public bool StopEnabled { get; set; }   

@@ -1,17 +1,16 @@
-﻿using System;
+﻿using NLog;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Vigilate.Classes
+namespace Vigilate.Core
 {
-    internal class Vigilator
+    public partial class Vigilator
     {
+        internal static ILogger _logger = LogManager.GetCurrentClassLogger();
         public TaskBarBindings TaskBarBindings { get; set; }
         public event EventHandler StateChange;
-        internal Vigilator() { }
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+        public Vigilator() { }
+        [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        private static partial EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
         [Flags]
         private enum EXECUTION_STATE : uint
         {
@@ -24,28 +23,35 @@ namespace Vigilate.Classes
         public void NoSleep()
         {
             TaskBarBindings.StartStop = "Stop";
-            Settings.Main.State = true;
+            Settings<VigilateSettings>.Main.State = true;
             StateChange?.Invoke(this, EventArgs.Empty);
             new TaskFactory().StartNew(async () =>
             {
-                while (Settings.Main.State)
+                while (Settings<VigilateSettings>.Main.State)
                 {
+                    _logger.Info("setting thread execution state as " +
+                        EXECUTION_STATE.ES_CONTINUOUS + " " +
+                        EXECUTION_STATE.ES_DISPLAY_REQUIRED + " " +
+                        EXECUTION_STATE.ES_SYSTEM_REQUIRED);
                     SetThreadExecutionState(
                         EXECUTION_STATE.ES_CONTINUOUS
                         | EXECUTION_STATE.ES_DISPLAY_REQUIRED
                         | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
-                    await Task.Delay(Settings.Main.PollPeriodMs);
+                    await Task.Delay(Settings<VigilateSettings>.Main.PollPeriodMs);
                 }
                 _event.WaitOne();
             },
             TaskCreationOptions.LongRunning);
+            Settings<VigilateSettings>.Save();
         }
         public void SomeSleep()
         {
             TaskBarBindings.StartStop = "Start";
-            Settings.Main.State = false;
+            Settings<VigilateSettings>.Main.State = false;
+            Settings<VigilateSettings>.Save();
             StateChange?.Invoke(this, EventArgs.Empty);
             _event.Set();
+            _logger.Info("vigilate has been disabled, computer can sleep.");
         }
     }
 }

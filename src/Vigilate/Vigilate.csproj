@@ -30,10 +30,9 @@
 	  <LangVersion>latest</LangVersion>
 	  <Authors>Ollie Sharratt</Authors>
 	  <PackageIcon>Images\app.ico</PackageIcon>
-	  <PackageIconUrl />
 	  <ApplicationIcon>Images\app.ico</ApplicationIcon>
-	  <AssemblyVersion>1.1.0.7</AssemblyVersion>
-	  <FileVersion>1.1.0.7</FileVersion>
+	  <AssemblyVersion>1.2.0.0</AssemblyVersion>
+	  <FileVersion>$(AssemblyVersion)</FileVersion>
 	  <BaseOutputPath>build\output\</BaseOutputPath>
 	  <BaseIntermediateOutputPath>build\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
@@ -55,6 +54,11 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="NLog" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vigilate.Core\Vigilate.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
