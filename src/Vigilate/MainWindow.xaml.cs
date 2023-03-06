@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
-using Vigilate.Classes;
+using Vigilate.Core;
 
-namespace VigilateUI
+namespace Vigilate
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -10,11 +11,12 @@ namespace VigilateUI
     public partial class MainWindow : Window
     {
         private readonly Vigilator vigilator;
-        private MainWindowBindings bindings;
+        private readonly PropertyStatus bindings;
         public MainWindow()
         {
             InitializeComponent();
-            Title = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Version v = Assembly.GetExecutingAssembly().GetName().Version;
+            Title = string.Format("{0}.{1}.{2}", v.Major, v.Minor, v.Build);
             vigilator = new();
             vigilator.StateChange += Vigilator_StateChange;
             InitTaskbar();
@@ -24,27 +26,27 @@ namespace VigilateUI
         }
         private void Vigilator_StateChange(object sender, System.EventArgs e)
         {
-            bindings.StartEnabled = !Settings.Main.State;
-            bindings.StopEnabled = Settings.Main.State;
+            bindings.StartEnabled = !Settings<VigilateSettings>.Main.State;
+            bindings.StopEnabled = Settings<VigilateSettings>.Main.State;
         }
         private void CheckState()
         {
-            if(Settings.Main.State) 
+            if (Settings<VigilateSettings>.Main.State)
             {
                 vigilator.NoSleep();
             }
         }
         private void InitTaskbar()
         {
-            TaskbarMenu taskbarMenu = new(vigilator);
+            TaskbarMenu taskbarMenu = new(vigilator, this);
             taskbarIcon.ContextMenu = taskbarMenu;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Left = SystemParameters.WorkArea.Right - Width;
             Top = SystemParameters.WorkArea.Bottom - Height;
-            bindings.StartEnabled = !Settings.Main.State;
-            bindings.StopEnabled = Settings.Main.State;
+            bindings.StartEnabled = !Settings<VigilateSettings>.Main.State;
+            bindings.StopEnabled = Settings<VigilateSettings>.Main.State;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -60,9 +62,7 @@ namespace VigilateUI
             e.Cancel = true;
         }
 
-        private void taskbarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("here");
-        }
+        private void TaskbarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
+        { }
     }
 }
