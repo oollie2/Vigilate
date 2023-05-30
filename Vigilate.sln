@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vigilate", "src\Vigilate\Vigilate.csproj", "{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vigilate.Windows.Wpf", "src\Vigilate.Windows\Vigilate.Windows.Wpf\Vigilate.Windows.Wpf.csproj", "{CAA9EF6E-6E6D-4CD5-B15F-A95C8ABC1E8D}"
 EndProject
-Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Vigilate.Installer", "src\Vigilate.Installer\Vigilate.Installer.wixproj", "{5384EC0A-036B-49DB-8053-F84FAFA73198}"
+Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Vigilate.Windows.Installer", "src\Vigilate.Installer\Vigilate.Windows.Installer.wixproj", "{5384EC0A-036B-49DB-8053-F84FAFA73198}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vigilate.Core", "src\Vigilate.Core\Vigilate.Core.csproj", "{0799C04C-9329-4F3D-82DB-225561BB67C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigilate.Tests", "src\Vigilate.Tests\Vigilate.Tests.csproj", "{B2E3F150-DE2C-471B-82B7-11C503F0780C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigilate.Windows", "src\Vigilate.Windows\Vigilate.Windows.csproj", "{6AA3445A-895B-4092-8F3C-4415CDB220FE}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECD91FE1-202C-4B29-8E41-1D943585EBD5}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
@@ -46,6 +52,22 @@ Global
 		{0799C04C-9329-4F3D-82DB-225561BB67C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0799C04C-9329-4F3D-82DB-225561BB67C6}.Release|x64.ActiveCfg = Release|Any CPU
 		{0799C04C-9329-4F3D-82DB-225561BB67C6}.Release|x64.Build.0 = Release|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2E3F150-DE2C-471B-82B7-11C503F0780C}.Release|x64.Build.0 = Release|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{6AA3445A-895B-4092-8F3C-4415CDB220FE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

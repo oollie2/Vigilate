@@ -30,16 +30,16 @@
     <Compile Include="_doNotEdit-PublishOutput.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0-rc.3" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0-rc.3" />
-    <PackageReference Include="WixToolset.Heat" Version="4.0.0-rc.3" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
+    <PackageReference Include="WixToolset.Heat" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Includes.wxi" />
     <Content Include="RemoveNotRequired.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vigilate\Vigilate.csproj">
+    <ProjectReference Include="..\Vigilate\Vigilate.Windows.Wpf.csproj">
       <Name>Vigilate</Name>
       <Project>{caa9ef6e-6e6d-4cd5-b15f-a95c8abc1e8d}</Project>
       <Private>True</Private>
