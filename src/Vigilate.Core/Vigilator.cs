@@ -42,13 +42,13 @@ namespace Vigilate.Core
                 _event.WaitOne();
             },
             TaskCreationOptions.LongRunning);
-            Settings<VigilateSettings>.Save();
+            Settings<VigilateSettings>.Save().Wait();
         }
         public void SomeSleep()
         {
             TaskBarBindings.StartStop = "Start";
             Settings<VigilateSettings>.Main.State = false;
-            Settings<VigilateSettings>.Save();
+            Settings<VigilateSettings>.Save().Wait();
             StateChange?.Invoke(this, EventArgs.Empty);
             _event.Set();
             _logger.Info("vigilate has been disabled, computer can sleep.");

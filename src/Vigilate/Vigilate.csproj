@@ -31,7 +31,7 @@
 	  <Authors>Ollie Sharratt</Authors>
 	  <PackageIcon>Images\app.ico</PackageIcon>
 	  <ApplicationIcon>Images\app.ico</ApplicationIcon>
-	  <AssemblyVersion>1.2.0.5</AssemblyVersion>
+	  <AssemblyVersion>1.2.1</AssemblyVersion>
 	  <FileVersion>$(AssemblyVersion)</FileVersion>
 	  <BaseOutputPath>build\output\</BaseOutputPath>
 	  <BaseIntermediateOutputPath>build\obj\</BaseIntermediateOutputPath>
@@ -64,7 +64,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-    <PackageReference Include="NLog" Version="5.1.2" />
+    <PackageReference Include="NLog" Version="5.2.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace Vigilate
                 Assembly.GetExecutingAssembly().GetName().Name +
                 @"\Settings\settings.json");
 #endif
-            Settings<VigilateSettings> Settings = new(SettingsFile);
+            Settings<VigilateSettings>.Read(SettingsFile).Wait();
 
             _ = new MainWindow();
             _logger.Info("vigilate succesfully started.");
@@ -36,7 +36,7 @@ namespace Vigilate
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             _logger.Info("vigilate shutting down.");
-            Settings<VigilateSettings>.Save();
+            Settings<VigilateSettings>.Save().Wait();
             Environment.Exit(0);
         }
     }
