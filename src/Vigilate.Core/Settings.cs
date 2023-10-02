@@ -5,7 +5,7 @@ using NLog;
 namespace Vigilate.Core;
 
 /// <summary>
-/// This class configures the serialization and de-serialization of any settings defined within the class IntegrateSettings.
+/// This class configures the serialization and de-serialization of any settings defined within the class T.
 /// Reading and writing are possible to and from any JSON file.
 /// </summary>
 public class Settings<T> where T : new()
