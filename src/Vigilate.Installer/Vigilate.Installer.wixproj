@@ -1,59 +1,60 @@
-<Project>
-  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.0-rc.3" />
-  <PropertyGroup>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <OutputPath>build\output\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
-    <OutputName>VigilateInstaller</OutputName>
-    <Name>VigilateInstaller.Installer</Name>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <OutputPath>build\output\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug</DefineConstants>
-    <ProductVersion>3.10</ProductVersion>
-    <OutputName>VigilateInstaller</OutputName>
-    <Name>Vigilate.Installer</Name>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OutputPath>build\output\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug</DefineConstants>
-    <ProductVersion>3.10</ProductVersion>
-    <OutputName>VigilateInstaller</OutputName>
-    <Name>Vigilate.Installer</Name>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="VigilateInstallerConfiguration.wxs" />
-    <Compile Include="_doNotEdit-PublishOutput.wxs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0-rc.3" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0-rc.3" />
-    <PackageReference Include="WixToolset.Heat" Version="4.0.0-rc.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Includes.wxi" />
-    <Content Include="RemoveNotRequired.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Vigilate\Vigilate.csproj">
-      <Name>Vigilate</Name>
-      <Project>{caa9ef6e-6e6d-4cd5-b15f-a95c8abc1e8d}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.0-rc.3" />
-  <Target Name="BeforeBuild" DependsOnTargets="ResolveReferences">
-    <PropertyGroup>
-      <LinkerBaseInputPaths>"%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64"</LinkerBaseInputPaths>
-      <DefineConstants>BasePath=%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64</DefineConstants>
-    </PropertyGroup>
-    <HeatDirectory OutputFile="_doNotEdit-PublishOutput.wxs" Directory="%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="Vigilate_Project" SuppressCom="true" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" Transforms="RemoveNotRequired.xslt" />
-  </Target>
+﻿<Project>
+	<Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.2" />
+	<PropertyGroup>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+		<OutputPath>build\output\$(Configuration)\</OutputPath>
+		<IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
+		<OutputName>VigilateInstaller</OutputName>
+		<Name>VigilateInstaller.Installer</Name>
+		<SuppressValidation>True</SuppressValidation>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+		<OutputPath>build\output\$(Configuration)\</OutputPath>
+		<IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
+		<DefineConstants>Debug</DefineConstants>
+		<ProductVersion>3.10</ProductVersion>
+		<OutputName>VigilateInstaller</OutputName>
+		<Name>Vigilate.Installer</Name>
+	</PropertyGroup>
+	<PropertyGroup>
+		<OutputPath>build\output\$(Configuration)\</OutputPath>
+		<IntermediateOutputPath>build\obj\$(Configuration)\</IntermediateOutputPath>
+		<DefineConstants>Debug</DefineConstants>
+		<ProductVersion>3.10</ProductVersion>
+		<OutputName>VigilateInstaller</OutputName>
+		<Name>Vigilate.Installer</Name>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="VigilateInstallerConfiguration.wxs" />
+		<Compile Include="_doNotEdit-PublishOutput.wxs" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="WixToolset.Util.wixext" Version="4.0.2" />
+		<PackageReference Include="WixToolset.UI.wixext" Version="4.0.2" />
+		<PackageReference Include="WixToolset.Heat" Version="4.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Includes.wxi" />
+		<Content Include="RemoveNotRequired.xslt" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Vigilate\Vigilate.csproj">
+			<Name>Vigilate</Name>
+			<Project>{caa9ef6e-6e6d-4cd5-b15f-a95c8abc1e8d}</Project>
+			<Private>True</Private>
+			<DoNotHarvest>True</DoNotHarvest>
+			<RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+			<RefTargetDir>INSTALLFOLDER</RefTargetDir>
+		</ProjectReference>
+	</ItemGroup>
+	<Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.2" />
+	<Target Name="BeforeBuild" DependsOnTargets="ResolveReferences">
+		<PropertyGroup>
+			<LinkerBaseInputPaths>"%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64"</LinkerBaseInputPaths>
+			<DefineConstants>BasePath=%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64</DefineConstants>
+		</PropertyGroup>
+		<HeatDirectory OutputFile="_doNotEdit-PublishOutput.wxs" Directory="%(ProjectReference.RootDir)%(ProjectReference.Directory)build\output\$(Platform)\$(Configuration)\net7.0-windows\win10-x64" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="Vigilate_Project" SuppressCom="true" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" Transforms="RemoveNotRequired.xslt" />
+	</Target>
 </Project>
